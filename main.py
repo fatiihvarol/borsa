@@ -22,7 +22,7 @@ def create_summary_sheet(writer, all_data):
         latest_data = data.loc[latest_date]
         previous_data = data.loc[data.index[-2]]
         change = latest_data['Close'] - previous_data['Close']
-        changeYüzde = 100 - ((latest_data['Close'] * 100) / previous_data['Close'])
+        changeYüzde =  ((previous_data['Close']-latest_data['Close'])/previous_data['Close'])*100
         color = 'FF0000' if change < 0 else '00FF00'
         summary_data.append([symbol, previous_data['Close'], latest_data['High'], latest_data['Low'], latest_data['Close'], latest_data['Volume'], change, changeYüzde, color])
 
