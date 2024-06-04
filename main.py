@@ -24,9 +24,9 @@ def create_summary_sheet(writer, all_data):
         change = latest_data['Close'] - previous_data['Close']
         changeYüzde = 100 - ((latest_data['Close'] * 100) / previous_data['Close'])
         color = 'FF0000' if change < 0 else '00FF00'
-        summary_data.append([symbol, latest_data['Open'], latest_data['High'], latest_data['Low'], latest_data['Close'], latest_data['Volume'], change, changeYüzde, color])
+        summary_data.append([symbol, previous_data['Close'], latest_data['High'], latest_data['Low'], latest_data['Close'], latest_data['Volume'], change, changeYüzde, color])
 
-    summary_df = pd.DataFrame(summary_data, columns=['Symbol', 'Open', 'High', 'Low', 'Close', 'Volume', 'Change', 'Change %', 'Color'])
+    summary_df = pd.DataFrame(summary_data, columns=['Symbol', 'Open', 'High', 'Low', 'Current', 'Volume', 'Change', 'Change %', 'Color'])
 
     summary_df.to_excel(writer, sheet_name='Summary', index=False)
     return summary_df
