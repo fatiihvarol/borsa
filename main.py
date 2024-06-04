@@ -22,11 +22,11 @@ def create_summary_sheet(writer, all_data):
         latest_data = data.loc[latest_date]
         previous_data = data.loc[data.index[-2]]
         change = latest_data['Close'] - previous_data['Close']
-        changeYüzde=100-((latest_data['Close']*100)/previous_data['Close'])
+        changeYüzde = 100 - ((latest_data['Close'] * 100) / previous_data['Close'])
         color = 'FF0000' if change < 0 else '00FF00'
-        summary_data.append([symbol, latest_data['Open'], latest_data['High'], latest_data['Low'], latest_data['Close'], latest_data['Volume'], change, color])
+        summary_data.append([symbol, latest_data['Open'], latest_data['High'], latest_data['Low'], latest_data['Close'], latest_data['Volume'], change, changeYüzde, color])
 
-    summary_df = pd.DataFrame(summary_data, columns=['Symbol', 'Open', 'High', 'Low', 'Close', 'Volume', 'Change', 'Color'])
+    summary_df = pd.DataFrame(summary_data, columns=['Symbol', 'Open', 'High', 'Low', 'Close', 'Volume', 'Change', 'Change %', 'Color'])
 
     summary_df.to_excel(writer, sheet_name='Summary', index=False)
     return summary_df
@@ -36,13 +36,13 @@ def apply_colors(workbook, summary_df):
     for idx, row in summary_df.iterrows():
         color = row['Color']
         fill = PatternFill(start_color=color, end_color=color, fill_type="solid")
-        for col in range(1, 8):  # Columns A to G
+        for col in range(1, 9):  # Columns A to H
             cell = ws.cell(row=idx+2, column=col)  # +2 because openpyxl is 1-indexed and there's a header row
             cell.fill = fill
 
 def main():
     # List of symbols for Borsa Istanbul stocks
-    symbols = ['ASELS.IS','ALTNY.IS','AGROT.IS','KOPOL.IS','ALFAS.IS','ASTOR.IS','EUPWR.IS','CVKMD.IS','CWENE.IS','ENERY.IS','FZLGY.IS','GOKNR.IS','HEKTS.IS','KOCMT.IS','HRKET,IS','IZENR,IS','ODINE.IS','PLTUR.IS','KOTON.IS','LILAK.IS','LMKDC.IS','TNZTP.IS','REEDER.IS','SAHOL.IS','SDTTR.IS','SOKM.IS','VAKBN.IS'] 
+    symbols = ['ASELS.IS', 'ALTNY.IS', 'AGROT.IS', 'KOPOL.IS', 'ALFAS.IS', 'ASTOR.IS', 'EUPWR.IS', 'CVKMD.IS', 'CWENE.IS', 'ENERY.IS', 'FZLGY.IS', 'GOKNR.IS', 'HEKTS.IS', 'KOCMT.IS', 'HRKET.IS', 'IZENR.IS', 'ODINE.IS', 'PLTUR.IS', 'KOTON.IS', 'LILAK.IS', 'LMKDC.IS', 'TNZTP.IS', 'REEDER.IS', 'SAHOL.IS', 'SDTTR.IS', 'SOKM.IS', 'VAKBN.IS']
     all_data = {}
 
     for symbol in symbols:
