@@ -41,7 +41,7 @@ def apply_colors(workbook, summary_df):
 
 def main():
     # List of symbols for Borsa Istanbul stocks
-    symbols = ['TCELL.IS', 'KCHOL.IS', 'ASELS.IS']  # Yahoo Finance symbols for BIST stocks
+    symbols = ['ASELS.IS','ALTNY.IS','AGROT.IS','KOPOL.IS','ALFAS.IS','ASTOR.IS','EUPWR.IS','CVKMD.IS','CWENE.IS','ENERY.IS','FZLGY.IS','GOKNR.IS','HEKTS.IS','KOCMT.IS','HRKET,IS','IZENR,IS','ODINE.IS','PLTUR.IS','KOTON.IS','LILAK.IS','LMKDC.IS','TNZTP.IS','REEDER.IS','SAHOL.IS','SDTTR.IS','SOKM.IS','VAKBN.IS'] 
     all_data = {}
 
     for symbol in symbols:
